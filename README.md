@@ -7,7 +7,7 @@ Rollator is a script to do systemd-docker updates from a external CI tool.
 ```bash
 
 # Install dependency:
-apt-get install inotify-tools
+apt-get install inotify-tools inotify-hookable
 
 git clone https://github.com/fabianhauser/rollator.git /opt/rollator
 mkdir /var/lib/rollator
