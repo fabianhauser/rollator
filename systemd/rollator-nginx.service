@@ -3,5 +3,7 @@ Description=Rollator daemon for nginx service.
 
 [Service]
 TimeoutStartSec=0
-Environment="CONTAINER=nginx" "SERVICE=nginx"
-ExecStart=/opt/rollator/rollator.bash /var/lib/rollator/${SERVICE}/restart ${CONTAINER} ${SERVICE}.service
+Environment="CONTAINER=nginx:latest" "SERVICE=nginx"
+ExecStartPre=/usr/bin/touch /var/lib/rollator/${SERVICE}.lockfile
+ExecStart=/opt/rollator/rollator.bash /var/lib/rollator/${SERVICE}/restart /var/lib/rollator/${SERVICE}.lockfile ${CONTAINER} ${SERVICE}.service
+
