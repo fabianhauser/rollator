@@ -7,13 +7,13 @@ IMAGE=$3
 SERVICE=$4
 
 while true; do
-  # Wait on a change on the watchfile
+  echo Wait on a change on the watchfile
   inotifywait -e create ${WATCH_FILE}
 
   echo Waiting on lock release
-  if [ `flock -n $LOCK_FILE}` ]; then
+  ( flock -n 9 || exit 1
     echo Lock aquired
-    while rm touchfile 2>/dev/null; do 
+    while rm restart 2>/dev/null; do 
       OLD_IMAGE_HASH=`docker images ${IMAGE} -q`
 
       docker pull ${IMAGE}
@@ -24,7 +24,6 @@ while true; do
     done
     flock -u ${LOCK_FILE}
     echo Lock freed
-  else
-    echo Deployment currently running
-  fi
+  ) 9>$LOCK_FILE
+  echo Continue
 done
