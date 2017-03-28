@@ -33,6 +33,7 @@ useradd --system \
     rollator-${SERVICE}
 
 su -c 'ssh-keygen -q -t ed25519 ' rollator-${SERVICE}
+su -c 'cd ~/.ssh && cp id_ed25519.pub authorized_keys' rollator-${SERVICE}
 # Accept defaults
 # Add following private key to your service under env variable SSH_KEY
 cat /var/lib/rollator/${SERVICE}/.ssh/id_ed25519 | base64 --wrap=0
