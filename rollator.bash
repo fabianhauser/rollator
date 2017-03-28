@@ -22,7 +22,6 @@ while true; do
         systemctl restart ${SERVICE}
       fi
     done
-    flock -u ${LOCK_FILE}
     echo Lock freed
   ) 9>$LOCK_FILE
   echo Continue
