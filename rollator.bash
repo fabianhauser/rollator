@@ -7,7 +7,7 @@ SERVICE=$3
 
 while true; do
   # Wait on a change on the watchfile
-  notifywait -e create ${WATCH_FILE}
+  inotifywait -e create ${WATCH_FILE}
 
   echo Waiting on lock release
   if [ `flock -n ${WATCH_FILE}` ]; then
