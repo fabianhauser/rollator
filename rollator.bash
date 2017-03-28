@@ -20,7 +20,7 @@ while true; do
       echo "Pulling container"
       docker pull ${IMAGE}
   
-      if [ "`docker images ${IMAGE} -q`" == "${OLD_IMAGE_HASH}" ]; then
+      if [ "`docker images -q ${IMAGE}`" != "${OLD_IMAGE_HASH}" ]; then
         echo "Restarting container"
         systemctl restart ${SERVICE}
       else
