@@ -1,0 +1,7 @@
+[Unit]
+Description=Rollator daemon for nginx service.
+
+[Service]
+TimeoutStartSec=0
+Environment="CONTAINER=nginx" "SERVICE=nginx"
+ExecStart=/opt/rollator/rollator.bash /var/lib/rollator/${SERVICE}/restart ${CONTAINER} ${SERVICE}.service
