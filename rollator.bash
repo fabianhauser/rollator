@@ -6,9 +6,9 @@ IMAGE=$2
 SERVICE=$3
 
 # Remove lock on start
-flock -u ${WATCH_FILE} || true
+flock -u `dirname ${WATCH_FILE}` || true
 
-while; do
+while true; do
 
   # Wait on a change on the watchfile
   notifywait -e create ${WATCH_FILE}
