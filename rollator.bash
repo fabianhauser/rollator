@@ -6,7 +6,7 @@ IMAGE=$2
 SERVICE=$3
 
 # Remove lock on start
-flock -u `dirname ${WATCH_FILE}` || true
+flock -u `dirname ${WATCH_FILE}` >/dev/null 2>&1 || true
 
 while true; do
 
